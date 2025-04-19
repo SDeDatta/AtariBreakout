@@ -12,7 +12,7 @@ public class Ball {
 
     public Ball(int x, int y, int radius)
     {
-        sunImage =  new ImageIcon("Resources/SunImage.jpg").getImage();
+        sunImage =  new ImageIcon("Resources/SunImage-Photoroom.png").getImage();
         this.x = x;
         this.y = y;
         this.radius = radius;

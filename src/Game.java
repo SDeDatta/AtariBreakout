@@ -20,10 +20,23 @@ public class Game implements KeyListener,ActionListener{
         blocks = new ArrayList<>();
         this.bar = new Bar(10);
         this.ball = new Ball(100, 100, 10);
+        int rows = 5;
+        int cols = 10;
+        int padding = 10;
+        int blockWidth = (GameView.WINDOW_WIDTH - (cols + 1) * padding) / cols;
+        int blockHeight = 30;
+        int startX = padding;
+        int startY = 100;
         this.window = new GameView(this);
-        for(int i = 0; i < 100; i++)
+        window.addKeyListener(this);
+        for(int row = 0; row < rows; row++)
         {
-            blocks.add(new Block(200,200, 50, window));
+            for(int col = 0; col < cols; col++)
+            {
+                int x = startX + col * (blockWidth + padding);
+                int y = startY + row * (blockHeight + padding);
+                blocks.add(new Block(x, y, blockWidth, blockHeight, window));
+            }
         }
         this.score = 0;
     }

@@ -22,6 +22,7 @@ public class GameView extends JFrame{
         bar = game.getBar();
         // Setup the window and the buffer strategy.
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.setLocationRelativeTo(null);
         this.setTitle("Atari Breakout");
         this.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
         this.setVisible(true);
@@ -56,22 +57,25 @@ public class GameView extends JFrame{
         }
         else if(game.getState().equals("game"))
         {
-
+            drawGame(g);
         }
-        //g.drawImage(bgImage,0,0,WINDOW_WIDTH, WINDOW_HEIGHT, this);
-        //bar.draw(g);
-        //ball.draw(g);
-        //for(Block b: game.getBlocks())
-        //{
-          //  b.draw(g);
-        //}
     }
     public void drawStart(Graphics g)
     {
         g.setFont(new Font("SansSerif", Font.BOLD, 15));
-        g.setColor(Color.LIGHT_GRAY);
+        g.setColor(Color.GRAY);
         g.drawString("Welcome to Penguin Breakout! This penguin loves the beach, he is far too ", 200, 350);
         g.drawString("cold. Deflect the sun to hit the blocks of ice and warm him up!", 250, 380);
         g.drawString("You lose if you let the sun hit the ground. Hit the up arrow to start. Enjoy!", 250, 410);
+    }
+    public void drawGame(Graphics g)
+    {
+        g.drawImage(bgImage,0,0,WINDOW_WIDTH, WINDOW_HEIGHT, this);
+        bar.draw(g);
+        ball.draw(g);
+        for(Block b: game.getBlocks())
+        {
+            b.draw(g);
+        }
     }
 }
