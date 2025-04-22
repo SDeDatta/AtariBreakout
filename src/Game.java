@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -18,8 +19,8 @@ public class Game implements KeyListener,ActionListener{
     {
         state = "instructions";
         blocks = new ArrayList<>();
-        this.bar = new Bar(10);
-        this.ball = new Ball(100, 100, 10);
+        this.bar = new Bar(10, 0, 0);
+        this.ball = new Ball(100, 100, 45, this);
         int rows = 5;
         int cols = 10;
         int padding = 10;

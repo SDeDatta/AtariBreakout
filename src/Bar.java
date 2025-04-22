@@ -7,15 +7,24 @@ public class Bar {
     private int speed;
     private final int width = 50;
     private final int height = 10;
+    private int dx;
+    private int dy;
 
-
-    public Bar(int speed)
+    public Bar(int speed, int dx, int dy)
     {
         x = 375;
+        this.dx = dx;
+        this.dy = dy;
         this.speed = speed;
     }
     public void moveLeft()
-    {}
+    {
+        // Change the speed
+        dx += -10;
+    }
+
+        this.x += dx;
+    }
     public void moveRight()
     {}
     public void draw(Graphics g)

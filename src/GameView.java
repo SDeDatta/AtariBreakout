@@ -5,6 +5,7 @@ import java.awt.image.BufferStrategy;
 
 public class GameView extends JFrame{
     private Image bgImage;
+    private Image initialBgImage;
     public static final int WINDOW_WIDTH = 1000;
     public final int WINDOW_HEIGHT = 800;
     private final int TITLE_BAR_HEIGHT = 23;
@@ -18,6 +19,7 @@ public class GameView extends JFrame{
         // TODO: initialize the View's instance variables.
         this.game = g;
         bgImage = new ImageIcon("Resources/Pengu.jpeg").getImage();
+        initialBgImage = new ImageIcon("Resources/BlackBackground.jpg").getImage();
         ball = game.getBall();
         bar = game.getBar();
         // Setup the window and the buffer strategy.
@@ -62,6 +64,7 @@ public class GameView extends JFrame{
     }
     public void drawStart(Graphics g)
     {
+        g.drawImage(initialBgImage, 0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, this);
         g.setFont(new Font("SansSerif", Font.BOLD, 15));
         g.setColor(Color.GRAY);
         g.drawString("Welcome to Penguin Breakout! This penguin loves the beach, he is far too ", 200, 350);
