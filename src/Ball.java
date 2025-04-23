@@ -22,7 +22,11 @@ public class Ball {
         this.dy = MAX_SPEED - (int) (Math.random() * MAX_SPEED * 2);
     }
     public void move()
-    {}
+    {
+        x += dx;
+        y += dy;
+        bounce();
+    }
     public void draw(Graphics g)
     {
         g.drawImage(sunImage, x, y, diameter, diameter, northPole);
@@ -32,7 +36,7 @@ public class Ball {
         if ((x <= 0 && dx < 0) || (x >= 1000 - diameter&& dx > 0)) {
             dx = -dx;
         }
-        if(y >= 0 && y < 800)
+        if(y <= 0 && y > 800)
         {
             dy = -dy;
         }
@@ -53,11 +57,11 @@ public class Ball {
         }
     }
     public Rectangle getBounds()
-    {return null;}
+    {return new Rectangle(x, y, diameter, diameter);}
     public int getX()
-    {return 0;}
+    {return this.x;}
     public int getY()
-    {return 0;}
+    {return this.y;}
 
 }
 

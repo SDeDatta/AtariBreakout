@@ -26,7 +26,7 @@ public class Block {
     }
 
     public Rectangle getBounds()
-    {return null;}
+    {return new Rectangle(x, y, width, height);}
 
     public void checkHit()
     {}

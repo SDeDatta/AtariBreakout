@@ -9,10 +9,12 @@ public class Bar {
     private final int height = 10;
     private int dx;
     private int dy;
+    private int y;
 
     public Bar(int speed, int dx, int dy)
     {
         x = 375;
+        y = 700;
         this.dx = dx;
         this.dy = dy;
         this.speed = speed;
@@ -21,26 +23,27 @@ public class Bar {
     {
         // Change the speed
         dx += -10;
-    }
-
         this.x += dx;
     }
     public void moveRight()
-    {}
+    {
+        dx += 10;
+        this.x += dx;
+    }
     public void draw(Graphics g)
     {
         g.setColor(Color.BLUE);
-        g.fillRect(this.x, 700, 100, 10);
+        g.fillRect(this.x, y, 100, 10);
     }
     public Rectangle getBounds()
-    {return null;}
+    {return new Rectangle(x, y, width, height);}
     public int getX()
     {return 0;}
     public int getY()
     {return 0;}
     public int getSize()
     {return 0;}
-    public void shiftX(int shift, int xLow, int xHigh) {
+    /*public void shiftX(int shift, int xLow, int xHigh) {
         if (x - width/2 + shift <= xLow && shift < 0) {
             x = xLow + width/2;
         }
@@ -50,6 +53,6 @@ public class Bar {
         else {
             x += shift;
         }
-    }
+    }*/
 }
 

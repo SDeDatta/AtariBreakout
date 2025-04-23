@@ -9,12 +9,14 @@ import java.util.ArrayList;
 public class Game implements KeyListener,ActionListener{
     private ArrayList<Block> blocks;
     private GameView window;
-    private static final int SLEEP_TIME = 110;
+    private static final int SLEEP_TIME = 50;
     private static final int STEP_SIZE = 10;
     private Bar bar;
     private Ball ball;
     private int score;
     private String state;
+    private boolean leftPressed;
+    private boolean rightPressed;
     public Game()
     {
         state = "instructions";
@@ -40,12 +42,25 @@ public class Game implements KeyListener,ActionListener{
             }
         }
         this.score = 0;
+        this.leftPressed = false;
+        this.rightPressed = false;
     }
     public void start()
-    {}
-
+    {
+    }
     public void update()
-    {}
+    {
+        if(leftPressed)
+        {
+            bar.moveLeft();
+        }
+        if(rightPressed)
+        {
+            bar.moveRight();
+        }
+        ball.move();
+        checkCollisions();
+    }
 
     public void checkCollisions()
     {}
@@ -76,6 +91,10 @@ public class Game implements KeyListener,ActionListener{
     @Override
     public void actionPerformed(ActionEvent e)
     {
+        if(state.equals("game"))
+        {
+            update();
+        }
         window.repaint();
     }
 
@@ -88,19 +107,28 @@ public class Game implements KeyListener,ActionListener{
         switch(e.getKeyCode())
         {
             case KeyEvent.VK_LEFT:
-                bar.shiftX(-STEP_SIZE, 0, GameView.WINDOW_WIDTH);
+                leftPressed = true;
                 break;
             case KeyEvent.VK_RIGHT:
-                bar.shiftX(STEP_SIZE, 0, GameView.WINDOW_WIDTH);
+                rightPressed = true;
                 break;
             case KeyEvent.VK_UP:
                 this.state = "game";
+                break;
         }
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-
+        switch(e.getKeyCode())
+        {
+            case KeyEvent.VK_LEFT:
+                leftPressed = false;
+                break;
+            case KeyEvent.VK_RIGHT:
+                rightPressed = false;
+                break;
+        }
     }
     public static void main(String[] args) {
         Game g = new Game();
