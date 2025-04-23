@@ -1,3 +1,4 @@
+// Penguin Breakout by Surya De Datta
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -50,6 +51,14 @@ public class Game implements KeyListener,ActionListener{
     }
     public void update()
     {
+        if(ball.checkHitBottom())
+        {
+            this.state = "lost";
+        }
+        if(gameWon())
+        {
+            this.state = "won";
+        }
         if(leftPressed)
         {
             bar.moveLeft();
@@ -61,7 +70,14 @@ public class Game implements KeyListener,ActionListener{
         ball.move();
         checkCollisions();
     }
-
+    public boolean gameWon()
+    {
+        if(this.blocks.isEmpty())
+        {
+            return true;
+        }
+        return false;
+    }
     public void checkCollisions()
     {}
     public String getState()
@@ -112,7 +128,7 @@ public class Game implements KeyListener,ActionListener{
             case KeyEvent.VK_RIGHT:
                 rightPressed = true;
                 break;
-            case KeyEvent.VK_UP:
+            case KeyEvent.VK_SPACE:
                 this.state = "game";
                 break;
         }
@@ -123,10 +139,15 @@ public class Game implements KeyListener,ActionListener{
         switch(e.getKeyCode())
         {
             case KeyEvent.VK_LEFT:
+                bar.setVelocity(0);
                 leftPressed = false;
                 break;
             case KeyEvent.VK_RIGHT:
+                bar.setVelocity(0);
                 rightPressed = false;
+                break;
+            case KeyEvent.VK_SPACE:
+                this.state = "game";
                 break;
         }
     }

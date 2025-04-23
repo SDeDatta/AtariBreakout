@@ -13,8 +13,8 @@ public class Bar {
 
     public Bar(int speed, int dx, int dy)
     {
-        x = 375;
-        y = 700;
+        x = 500;
+        y = 760;
         this.dx = dx;
         this.dy = dy;
         this.speed = speed;
@@ -22,13 +22,17 @@ public class Bar {
     public void moveLeft()
     {
         // Change the speed
-        dx += -10;
+        dx -= 10;
         this.x += dx;
     }
     public void moveRight()
     {
         dx += 10;
         this.x += dx;
+    }
+    public void setVelocity(int velocity)
+    {
+        dx = velocity;
     }
     public void draw(Graphics g)
     {

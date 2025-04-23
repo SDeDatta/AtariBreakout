@@ -8,24 +8,34 @@ public class Ball {
     private int y;
     private int diameter;
     private int dx, dy;
-    private static final int MAX_SPEED = 8;
+    private static final int MAX_SPEED = 20;
     private Game g;
 
     public Ball(int x, int y, int diameter, Game g)
     {
         sunImage =  new ImageIcon("Resources/SunImage-Photoroom.png").getImage();
         this.g = g;
-        this.x = (int) (Math.random() * 1000);
-        this.y = (int) (Math.random() * 500 + 500);
+        this.x = (int) (Math.random() * 20) + 490;
+        this.y = (int) (Math.random() * 250) + 500;
         this.diameter = diameter;
-        this.dx = MAX_SPEED - (int) (Math.random() * MAX_SPEED * 2);
-        this.dy = MAX_SPEED - (int) (Math.random() * MAX_SPEED * 2);
+        //this.dx = MAX_SPEED - (int) (Math.random() * MAX_SPEED * 2);
+        this.dx = 10;
+        this.dy = 10;
+        //this.dy = MAX_SPEED - (int) (Math.random() * MAX_SPEED * 2);
     }
     public void move()
     {
         x += dx;
         y += dy;
         bounce();
+    }
+    public boolean checkHitBottom()
+    {
+        if(this.y >= 800 - diameter)
+        {
+            return true;
+        }
+        return false;
     }
     public void draw(Graphics g)
     {
@@ -36,7 +46,7 @@ public class Ball {
         if ((x <= 0 && dx < 0) || (x >= 1000 - diameter&& dx > 0)) {
             dx = -dx;
         }
-        if(y <= 0 && y > 800)
+        if(y <= diameter)
         {
             dy = -dy;
         }

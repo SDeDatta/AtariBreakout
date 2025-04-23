@@ -6,6 +6,8 @@ import java.awt.image.BufferStrategy;
 public class GameView extends JFrame{
     private Image bgImage;
     private Image initialBgImage;
+    private Image endBgImage;
+    private Image wonBgImage;
     public static final int WINDOW_WIDTH = 1000;
     public final int WINDOW_HEIGHT = 800;
     private final int TITLE_BAR_HEIGHT = 23;
@@ -20,6 +22,8 @@ public class GameView extends JFrame{
         this.game = g;
         bgImage = new ImageIcon("Resources/Pengu.jpeg").getImage();
         initialBgImage = new ImageIcon("Resources/BlackBackground.jpg").getImage();
+        endBgImage = new ImageIcon("Resources/GameOverBg.jpg").getImage();
+        wonBgImage = new ImageIcon("Resources/WinScreenBg.jpg").getImage();
         ball = game.getBall();
         bar = game.getBar();
         // Setup the window and the buffer strategy.
@@ -61,6 +65,14 @@ public class GameView extends JFrame{
         {
             drawGame(g);
         }
+        else if (game.getState().equals("lost"))
+        {
+            drawEnd(g);
+        }
+        else if(game.getState().equals("won"))
+        {
+            drawWon(g);
+        }
     }
     public void drawStart(Graphics g)
     {
@@ -69,7 +81,7 @@ public class GameView extends JFrame{
         g.setColor(Color.GRAY);
         g.drawString("Welcome to Penguin Breakout! This penguin loves the beach, he is far too ", 200, 350);
         g.drawString("cold. Deflect the sun to hit the blocks of ice and warm him up!", 250, 380);
-        g.drawString("You lose if you let the sun hit the ground. Hit the up arrow to start. Enjoy!", 250, 410);
+        g.drawString("You lose if you let the sun hit the ground. Press start to start. Enjoy!", 250, 410);
     }
     public void drawGame(Graphics g)
     {
@@ -80,5 +92,19 @@ public class GameView extends JFrame{
         {
             b.draw(g);
         }
+    }
+    public void drawEnd(Graphics g)
+    {
+        g.drawImage(endBgImage, 0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, this);
+        g.setColor(Color.GRAY);
+        g.setFont(new Font("SansSerif", Font.BOLD, 15));
+        g.drawString("Press space to play again", 400, 600);
+    }
+    public void drawWon(Graphics g)
+    {
+        g.drawImage(endBgImage, 0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, this);
+        g.setColor(Color.GRAY);
+        g.setFont(new Font("SansSerif", Font.BOLD, 15));
+        g.drawString("Congrats You're Brilliant", 400, 600);
     }
 }
