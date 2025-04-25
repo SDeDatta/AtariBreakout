@@ -19,8 +19,9 @@ public class Ball {
         this.y = (int) (Math.random() * 250) + 500;
         this.diameter = diameter;
         //this.dx = MAX_SPEED - (int) (Math.random() * MAX_SPEED * 2);
-        this.dx = 10;
-        this.dy = 10;
+        this.dx = 5;
+        //this.dx = (int) (Math.random() * 15) * 7;
+        this.dy = -9;
         //this.dy = MAX_SPEED - (int) (Math.random() * MAX_SPEED * 2);
     }
     public void move()
@@ -62,8 +63,23 @@ public class Ball {
             {
                 dy = -dy;
                 g.getBlocks().remove(i);
+                increaseSpeed();
                 break;
             }
+        }
+    }
+    public void increaseSpeed()
+    {
+        int speedBoost = 1;
+        int maxSpeed = 20;
+
+        if(Math.abs(dx) < maxSpeed)
+        {
+            dx += speedBoost;
+        }
+        if(Math.abs(dy) < maxSpeed)
+        {
+            dy += speedBoost;
         }
     }
     public Rectangle getBounds()
