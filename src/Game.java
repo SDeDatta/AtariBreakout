@@ -147,9 +147,39 @@ public class Game implements KeyListener,ActionListener{
                 rightPressed = false;
                 break;
             case KeyEvent.VK_SPACE:
-                this.state = "game";
+                if(!this.state.equals("game"))
+                {
+                    resetGame();
+                }
                 break;
         }
+    }
+
+    public void resetGame()
+    {
+        blocks.clear();
+        int rows = 5;
+        int cols = 10;
+        int padding = 10;
+        int blockWidth = (GameView.WINDOW_WIDTH - (cols + 1) * padding) / cols;
+        int blockHeight = 30;
+        int startX = padding;
+        int startY = 100;
+        for(int row = 0; row < rows; row++)
+        {
+            for(int col = 0; col < cols; col++)
+            {
+                int x = startX + col * (blockWidth + padding);
+                int y = startY + row * (blockHeight + padding);
+                blocks.add(new Block(x, y, blockWidth, blockHeight, window));
+            }
+        }
+        this.state = "game";
+        this.score = 0;
+        this.leftPressed = false;
+        this.rightPressed = false;
+        ball.reset();
+        bar.reset();
     }
     public static void main(String[] args) {
         Game g = new Game();

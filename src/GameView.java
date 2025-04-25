@@ -12,7 +12,6 @@ public class GameView extends JFrame{
     public final int WINDOW_HEIGHT = 800;
     private final int TITLE_BAR_HEIGHT = 23;
     private Game game;
-    private String state;
     private Ball ball;
     private Bar bar;
     public GameView(Game g)
@@ -98,11 +97,11 @@ public class GameView extends JFrame{
         g.drawImage(endBgImage, 0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, this);
         g.setColor(Color.GRAY);
         g.setFont(new Font("SansSerif", Font.BOLD, 15));
-        g.drawString("Press space to play again", 400, 600);
+        g.drawString("You hit " + (50 - game.getBlocks().size()) + " Press space to play again", 400, 600);
     }
     public void drawWon(Graphics g)
     {
-        g.drawImage(endBgImage, 0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, this);
+        g.drawImage(wonBgImage, 0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, this);
         g.setColor(Color.GRAY);
         g.setFont(new Font("SansSerif", Font.BOLD, 15));
         g.drawString("Congrats You're Brilliant", 400, 600);

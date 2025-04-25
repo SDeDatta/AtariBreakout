@@ -53,7 +53,14 @@ public class Ball {
         }
         if(getBounds().intersects(g.getBar().getBounds()))
         {
-            dy = -dy;
+            int barMid = g.getBar().getBounds().x + g.getBar().getWidth() / 2;
+            int ballMid = x + diameter / 2;
+            int distFromCenter = ballMid - barMid;
+
+            double ratio = (double) distFromCenter / (g.getBar().getWidth() / 2);
+            int maxHorSpeed = 8;
+            dx = (int) (ratio * maxHorSpeed);
+            this.dy = -dy;
         }
 
         for(int i = 0; i < g.getBlocks().size(); i++)
@@ -68,6 +75,13 @@ public class Ball {
             }
         }
     }
+
+    public void reset()
+    {
+        this.dx = 5;
+        this.dy = 9;
+    }
+
     public void increaseSpeed()
     {
         int speedBoost = 1;

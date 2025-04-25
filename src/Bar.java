@@ -14,7 +14,7 @@ public class Bar {
     public Bar(int speed, int dx, int dy)
     {
         x = 500;
-        y = 760;
+        y = 750;
         this.dx = dx;
         this.dy = dy;
         this.speed = speed;
@@ -22,13 +22,19 @@ public class Bar {
     public void moveLeft()
     {
         // Change the speed
-        dx -= 10;
-        this.x += dx;
+        if(x + dx + width > 0)
+        {
+            dx -= 10;
+            this.x += dx;
+        }
     }
     public void moveRight()
     {
-        dx += 10;
-        this.x += dx;
+        if(x + dx  + width < 1000)
+        {
+            dx += 10;
+            this.x += dx;
+        }
     }
     public void setVelocity(int velocity)
     {
@@ -37,12 +43,22 @@ public class Bar {
     public void draw(Graphics g)
     {
         g.setColor(Color.BLUE);
-        g.fillRect(this.x, y, 100, 10);
+        g.fillRect(this.x, y, width, height);
+    }
+
+    public void reset()
+    {
+        this.x = 500;
+        this.y = 700;
     }
     public Rectangle getBounds()
     {return new Rectangle(x, y, width, height);}
     public int getX()
     {return 0;}
+    public int getWidth()
+    {
+        return width;
+    }
     public int getY()
     {return 0;}
     public int getSize()
