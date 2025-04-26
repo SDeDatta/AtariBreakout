@@ -5,8 +5,8 @@ import java.awt.event.KeyListener;
 public class Bar {
     private int x;
     private int speed;
-    private final int width = 50;
-    private final int height = 10;
+    private int width;
+    private int height;
     private int dx;
     private int dy;
     private int y;
@@ -15,6 +15,8 @@ public class Bar {
     {
         x = 500;
         y = 750;
+        this.width = 50;
+        this.height = 10;
         this.dx = dx;
         this.dy = dy;
         this.speed = speed;
@@ -58,6 +60,10 @@ public class Bar {
     public int getWidth()
     {
         return width;
+    }
+    public void setWidth(int width)
+    {
+        this.width = width;
     }
     public int getY()
     {return 0;}

@@ -77,10 +77,11 @@ public class GameView extends JFrame{
     {
         g.drawImage(initialBgImage, 0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, this);
         g.setFont(new Font("SansSerif", Font.BOLD, 15));
-        g.setColor(Color.GRAY);
+        g.setColor(Color.ORANGE);
         g.drawString("Welcome to Penguin Breakout! This penguin loves the beach, he is far too ", 200, 350);
         g.drawString("cold. Deflect the sun to hit the blocks of ice and warm him up!", 250, 380);
-        g.drawString("You lose if you let the sun hit the ground. Press start to start. Enjoy!", 250, 410);
+        g.drawString("You lose if you let the sun hit the ground. Press 1 to play easy.", 250, 410);
+        g.drawString("Press 2 to play medium, and 3 to play hard. Enjoy!", 250, 440);
     }
     public void drawGame(Graphics g)
     {
@@ -95,14 +96,14 @@ public class GameView extends JFrame{
     public void drawEnd(Graphics g)
     {
         g.drawImage(endBgImage, 0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, this);
-        g.setColor(Color.GRAY);
+        g.setColor(Color.ORANGE);
         g.setFont(new Font("SansSerif", Font.BOLD, 15));
-        g.drawString("You hit " + (50 - game.getBlocks().size()) + " Press space to play again", 400, 600);
+        g.drawString("You hit " + (30 - game.getBlocks().size()) + " Press space to play again", 400, 600);
     }
     public void drawWon(Graphics g)
     {
         g.drawImage(wonBgImage, 0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, this);
-        g.setColor(Color.GRAY);
+        g.setColor(Color.ORANGE);
         g.setFont(new Font("SansSerif", Font.BOLD, 15));
         g.drawString("Congrats You're Brilliant", 400, 600);
     }

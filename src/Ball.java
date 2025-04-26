@@ -24,6 +24,16 @@ public class Ball {
         this.dy = -9;
         //this.dy = MAX_SPEED - (int) (Math.random() * MAX_SPEED * 2);
     }
+    public void setSpeed(int xSpeed, int ySpeed)
+    {
+        this.dx = xSpeed;
+        this.dy = ySpeed;
+    }
+
+    public void setDiameter(int diameter)
+    {
+        this.diameter = diameter;
+    }
     public void move()
     {
         x += dx;
@@ -56,7 +66,6 @@ public class Ball {
             int barMid = g.getBar().getBounds().x + g.getBar().getWidth() / 2;
             int ballMid = x + diameter / 2;
             int distFromCenter = ballMid - barMid;
-
             double ratio = (double) distFromCenter / (g.getBar().getWidth() / 2);
             int maxHorSpeed = 8;
             dx = (int) (ratio * maxHorSpeed);
