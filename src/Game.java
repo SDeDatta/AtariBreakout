@@ -20,30 +20,11 @@ public class Game implements KeyListener,ActionListener {
     private boolean rightPressed;
     private String level;
 
-    public Game() {
-        state = "instructions";
-        blocks = new ArrayList<>();
-        this.bar = new Bar(10, 0, 0);
-        this.ball = new Ball(100, 100, 35, this);
-        int rows = 3;
-        int cols = 10;
-        int padding = 10;
-        int blockWidth = (GameView.WINDOW_WIDTH - (cols + 1) * padding) / cols;
-        int blockHeight = 30;
-        int startX = padding;
-        int startY = 100;
+    public Game()
+    {
+        resetGame();
         this.window = new GameView(this);
         window.addKeyListener(this);
-        for (int row = 0; row < rows; row++) {
-            for (int col = 0; col < cols; col++) {
-                int x = startX + col * (blockWidth + padding);
-                int y = startY + row * (blockHeight + padding);
-                blocks.add(new Block(x, y, blockWidth, blockHeight, window));
-            }
-        }
-        this.score = 0;
-        this.leftPressed = false;
-        this.rightPressed = false;
     }
 
     public void start() {
@@ -150,6 +131,9 @@ public class Game implements KeyListener,ActionListener {
                 bar.setVelocity(0);
                 rightPressed = false;
                 break;
+            case KeyEvent.VK_SPACE:
+                resetGame();
+                break;
         }
     }
 
@@ -161,23 +145,26 @@ public class Game implements KeyListener,ActionListener {
             ball.setDiameter(45);
             ball.setSpeed(3, -7);
         }
-        //if(this.level.equals("medium"))
-        //{
-          //  bar.setWidth(50);
-            //ball.setDiameter(15);
-            //ball.setSpeed(5, -9);
-        //}
+        if(this.level.equals("medium"))
+        {
+            bar.setWidth(60);
+            ball.setDiameter(38);
+            ball.setSpeed(5, -9);
+        }
         if(this.level.equals("hard"))
         {
-            bar.setWidth(35);
-            ball.setDiameter(20);
+            bar.setWidth(50);
+            ball.setDiameter(30);
             ball.setSpeed(7, -11);
         }
     }
-    /*public void resetGame()
+    public void resetGame()
     {
-        blocks.clear();
-        int rows = 5;
+        this.state = "instructions";
+        this.blocks = new ArrayList<>();
+        this.bar = new Bar(10, 0, 0);
+        this.ball = new Ball(100, 100, 35, this);
+        int rows = 3;
         int cols = 10;
         int padding = 10;
         int blockWidth = (GameView.WINDOW_WIDTH - (cols + 1) * padding) / cols;
@@ -193,13 +180,10 @@ public class Game implements KeyListener,ActionListener {
                 blocks.add(new Block(x, y, blockWidth, blockHeight, window));
             }
         }
-        this.state = "game";
         this.score = 0;
         this.leftPressed = false;
         this.rightPressed = false;
-        ball.reset();
-        bar.reset();
-    }*/
+    }
 
     public static void main(String[] args) {
         Game g = new Game();
