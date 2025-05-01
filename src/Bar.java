@@ -44,7 +44,7 @@ public class Bar {
     }
     public void draw(Graphics g)
     {
-        g.setColor(Color.BLUE);
+        g.setColor(Color.DARK_GRAY);
         g.fillRect(this.x, y, width, height);
     }
 

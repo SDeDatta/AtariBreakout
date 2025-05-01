@@ -44,6 +44,39 @@ public class Game implements KeyListener,ActionListener {
             bar.moveRight();
         }
         ball.move();
+        if(ball.getBounds().intersects(bar.getBounds()))
+        {
+            int barMid = bar.getBounds().x + bar.getWidth() / 2;
+            int ballMid = ball.getX() + ball.getDiameter() / 2;
+            int distFromCenter = ballMid - barMid;
+            double ratio = (double) distFromCenter / (bar.getWidth() / 2);
+            int maxHorSpeed = 8;
+            ball.setSpeed((ratio * maxHorSpeed), ball.getDy()* -1);
+        }
+
+        for(int i = 0; i < blocks.size(); i++)
+        {
+            Block b = blocks.get(i);
+            if(ball.getBounds().intersects(b.getBounds()))
+            {
+                ball.setDy(-1* ball.getDy());
+                blocks.remove(i);
+                if(this.level.equals("easy"))
+                {
+                    ball.increaseSpeed(0.2);
+
+                }
+                else if(this.level.equals("medium"))
+                {
+                    ball.increaseSpeed(0.4);
+                }
+                else if(this.level.equals("hard"))
+                {
+                    ball.increaseSpeed(0.8);
+                }
+                break;
+            }
+        }
         checkCollisions();
     }
 

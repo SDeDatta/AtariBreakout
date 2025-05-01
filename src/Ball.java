@@ -7,7 +7,7 @@ public class Ball {
     private int x;
     private int y;
     private int diameter;
-    private int dx, dy;
+    private double dx, dy;
     private static final int MAX_SPEED = 20;
     private Game g;
 
@@ -19,12 +19,12 @@ public class Ball {
         this.y = (int) (Math.random() * 250) + 500;
         this.diameter = diameter;
         //this.dx = MAX_SPEED - (int) (Math.random() * MAX_SPEED * 2);
-        this.dx = 5;
+        this.dx = 0;
         //this.dx = (int) (Math.random() * 15) * 7;
-        this.dy = -9;
+        this.dy = 0;
         //this.dy = MAX_SPEED - (int) (Math.random() * MAX_SPEED * 2);
     }
-    public void setSpeed(int xSpeed, int ySpeed)
+    public void setSpeed(double xSpeed, double ySpeed)
     {
         this.dx = xSpeed;
         this.dy = ySpeed;
@@ -61,28 +61,6 @@ public class Ball {
         {
             dy = -dy;
         }
-        if(getBounds().intersects(g.getBar().getBounds()))
-        {
-            int barMid = g.getBar().getBounds().x + g.getBar().getWidth() / 2;
-            int ballMid = x + diameter / 2;
-            int distFromCenter = ballMid - barMid;
-            double ratio = (double) distFromCenter / (g.getBar().getWidth() / 2);
-            int maxHorSpeed = 8;
-            dx = (int) (ratio * maxHorSpeed);
-            this.dy = -dy;
-        }
-
-        for(int i = 0; i < g.getBlocks().size(); i++)
-        {
-            Block b = g.getBlocks().get(i);
-            if(getBounds().intersects(b.getBounds()))
-            {
-                dy = -dy;
-                g.getBlocks().remove(i);
-                increaseSpeed();
-                break;
-            }
-        }
     }
 
     public void reset()
@@ -91,10 +69,10 @@ public class Ball {
         this.dy = 9;
     }
 
-    public void increaseSpeed()
+    public void increaseSpeed(double boost)
     {
-        int speedBoost = 1;
-        int maxSpeed = 20;
+        double speedBoost = boost;
+        double maxSpeed = 20;
 
         if(Math.abs(dx) < maxSpeed)
         {
@@ -109,6 +87,27 @@ public class Ball {
     {return new Rectangle(x, y, diameter, diameter);}
     public int getX()
     {return this.x;}
+    public double getDx()
+    {
+        return dx;
+    }
+    public double getDy()
+    {
+        return dy;
+    }
+    public int getDiameter()
+    {
+        return diameter;
+    }
+    public void setDx(double dx)
+    {
+        this.dx = dx;
+    }
+
+    public void setDy(double dy) {
+        this.dy = dy;
+    }
+
     public int getY()
     {return this.y;}
 
