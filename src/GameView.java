@@ -9,8 +9,7 @@ public class GameView extends JFrame{
     private Image endBgImage;
     private Image wonBgImage;
     public static final int WINDOW_WIDTH = 1000;
-    public final int WINDOW_HEIGHT = 800;
-    private final int TITLE_BAR_HEIGHT = 23;
+    public static final int WINDOW_HEIGHT = 800;
     private Game game;
     public GameView(Game g)
     {
@@ -20,7 +19,7 @@ public class GameView extends JFrame{
         bgImage = new ImageIcon("Resources/Pengu.jpeg").getImage();
         initialBgImage = new ImageIcon("Resources/BlackBackground.jpg").getImage();
         endBgImage = new ImageIcon("Resources/GameOverBg.jpg").getImage();
-        wonBgImage = new ImageIcon("Resources/WinScreenBg.jpg").getImage();
+        wonBgImage = new ImageIcon("Resources/WinScreen.jpg").getImage();
         game.getBall();
         game.getBar();
         // Setup the window and the buffer strategy.
@@ -76,10 +75,16 @@ public class GameView extends JFrame{
         g.drawImage(initialBgImage, 0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, this);
         g.setFont(new Font("SansSerif", Font.BOLD, 15));
         g.setColor(Color.ORANGE);
-        g.drawString("Welcome to Penguin Breakout! This penguin loves the beach, he is far too ", 200, 350);
-        g.drawString("cold. Deflect the sun to hit the blocks of ice and warm him up!", 250, 380);
-        g.drawString("You lose if you let the sun hit the ground. Press 1 to play easy.", 250, 410);
-        g.drawString("Press 2 to play medium, and 3 to play hard. Beware, the ball moves faster as you hit more blocks. Enjoy!", 250, 440);
+        int centerX = 200; // approximate x for centered text
+        int startY = 350;
+        int lineSpacing = 40;
+
+        g.drawString("Welcome to Penguin Breakout! This penguin loves the beach, he is far too", centerX, startY);
+        g.drawString("cold. Deflect the sun to hit the blocks of ice and warm him up!", centerX + 20, startY + lineSpacing);
+        g.drawString("You lose if you let the sun hit the ground. Press 1 to play easy.", centerX + 20, startY + 2 * lineSpacing);
+        g.drawString("Press 2 to play medium, and 3 to play hard. Beware, the ball moves faster", centerX, startY + 3 * lineSpacing);
+        g.drawString("as you hit more blocks. Enjoy!", centerX + 150, startY + 4 * lineSpacing);
+
     }
     public void drawGame(Graphics g)
     {
@@ -96,7 +101,7 @@ public class GameView extends JFrame{
         g.drawImage(endBgImage, 0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, this);
         g.setColor(Color.ORANGE);
         g.setFont(new Font("SansSerif", Font.BOLD, 15));
-        g.drawString("You hit " + (30 - game.getBlocks().size()) + " Press space to play again", 400, 600);
+        g.drawString("You hit " + (30 - game.getBlocks().size()) + "/30 Press space to play again", 400, 600);
     }
     public void drawWon(Graphics g)
     {
@@ -104,5 +109,6 @@ public class GameView extends JFrame{
         g.setColor(Color.ORANGE);
         g.setFont(new Font("SansSerif", Font.BOLD, 15));
         g.drawString("Congrats You're Brilliant", 400, 600);
+        g.drawString("Press space to play again", 400, 630);
     }
 }

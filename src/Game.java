@@ -11,7 +11,6 @@ public class Game implements KeyListener,ActionListener {
     private ArrayList<Block> blocks;
     private GameView window;
     private static final int SLEEP_TIME = 50;
-    private static final int STEP_SIZE = 10;
     private Bar bar;
     private Ball ball;
     private int score;
@@ -25,9 +24,6 @@ public class Game implements KeyListener,ActionListener {
         resetGame();
         this.window = new GameView(this);
         window.addKeyListener(this);
-    }
-
-    public void start() {
     }
 
     public void update() {
@@ -44,6 +40,18 @@ public class Game implements KeyListener,ActionListener {
             bar.moveRight();
         }
         ball.move();
+        checkCollisions();
+    }
+
+    public boolean gameWon() {
+        if (this.blocks.isEmpty()) {
+            return true;
+        }
+        return false;
+    }
+
+    public void checkCollisions()
+    {
         if(ball.getBounds().intersects(bar.getBounds()))
         {
             int barMid = bar.getBounds().x + bar.getWidth() / 2;
@@ -53,11 +61,10 @@ public class Game implements KeyListener,ActionListener {
             int maxHorSpeed = 8;
             ball.setSpeed((ratio * maxHorSpeed), ball.getDy()* -1);
         }
-
         for(int i = 0; i < blocks.size(); i++)
         {
-            Block b = blocks.get(i);
-            if(ball.getBounds().intersects(b.getBounds()))
+            Block block = blocks.get(i);
+            if(ball.getBounds().intersects(block.getBounds()))
             {
                 ball.setDy(-1* ball.getDy());
                 blocks.remove(i);
@@ -77,17 +84,6 @@ public class Game implements KeyListener,ActionListener {
                 break;
             }
         }
-        checkCollisions();
-    }
-
-    public boolean gameWon() {
-        if (this.blocks.isEmpty()) {
-            return true;
-        }
-        return false;
-    }
-
-    public void checkCollisions() {
     }
 
     public String getState() {
@@ -108,10 +104,6 @@ public class Game implements KeyListener,ActionListener {
 
     public int getScore() {
         return score;
-    }
-
-    public boolean checkGameOver() {
-        return false;
     }
 
     @Override
@@ -195,8 +187,8 @@ public class Game implements KeyListener,ActionListener {
     {
         this.state = "instructions";
         this.blocks = new ArrayList<>();
-        this.bar = new Bar(10, 0, 0);
-        this.ball = new Ball(100, 100, 35, this);
+        this.bar = new Bar(0, 0);
+        this.ball = new Ball(100, 100, 35);
         int rows = 3;
         int cols = 10;
         int padding = 10;

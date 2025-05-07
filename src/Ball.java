@@ -9,20 +9,15 @@ public class Ball {
     private int diameter;
     private double dx, dy;
     private static final int MAX_SPEED = 20;
-    private Game g;
 
-    public Ball(int x, int y, int diameter, Game g)
+    public Ball(int x, int y, int diameter)
     {
         sunImage =  new ImageIcon("Resources/SunImage-Photoroom.png").getImage();
-        this.g = g;
         this.x = (int) (Math.random() * 20) + 490;
         this.y = (int) (Math.random() * 250) + 500;
         this.diameter = diameter;
-        //this.dx = MAX_SPEED - (int) (Math.random() * MAX_SPEED * 2);
         this.dx = 0;
-        //this.dx = (int) (Math.random() * 15) * 7;
         this.dy = 0;
-        //this.dy = MAX_SPEED - (int) (Math.random() * MAX_SPEED * 2);
     }
     public void setSpeed(double xSpeed, double ySpeed)
     {
@@ -42,7 +37,7 @@ public class Ball {
     }
     public boolean checkHitBottom()
     {
-        if(this.y >= 800 - diameter)
+        if(this.y >= GameView.WINDOW_HEIGHT - diameter)
         {
             return true;
         }
@@ -54,11 +49,12 @@ public class Ball {
     }
     public void bounce()
     {
-        if ((x <= 0 && dx < 0) || (x >= 1000 - diameter&& dx > 0)) {
+        if ((x <= 0 && dx < 0) || (x >= GameView.WINDOW_WIDTH - diameter && dx > 0)) {
             dx = -dx;
         }
-        if(y <= diameter)
+        if(y < diameter)
         {
+            y = diameter;
             dy = -dy;
         }
     }

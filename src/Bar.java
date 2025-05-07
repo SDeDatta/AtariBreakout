@@ -4,14 +4,13 @@ import java.awt.event.KeyListener;
 
 public class Bar {
     private int x;
-    private int speed;
     private int width;
     private int height;
     private int dx;
     private int dy;
     private int y;
 
-    public Bar(int speed, int dx, int dy)
+    public Bar(int dx, int dy)
     {
         x = 500;
         y = 750;
@@ -19,12 +18,11 @@ public class Bar {
         this.height = 10;
         this.dx = dx;
         this.dy = dy;
-        this.speed = speed;
     }
     public void moveLeft()
     {
         // Change the speed
-        if(x + dx + width > 0)
+        if(x + dx > 0)
         {
             dx -= 10;
             this.x += dx;
@@ -32,7 +30,7 @@ public class Bar {
     }
     public void moveRight()
     {
-        if(x + dx  + width < 1000)
+        if(x + dx + width < GameView.WINDOW_WIDTH)
         {
             dx += 10;
             this.x += dx;
@@ -46,12 +44,6 @@ public class Bar {
     {
         g.setColor(Color.DARK_GRAY);
         g.fillRect(this.x, y, width, height);
-    }
-
-    public void reset()
-    {
-        this.x = 500;
-        this.y = 700;
     }
     public Rectangle getBounds()
     {return new Rectangle(x, y, width, height);}
@@ -69,16 +61,5 @@ public class Bar {
     {return 0;}
     public int getSize()
     {return 0;}
-    /*public void shiftX(int shift, int xLow, int xHigh) {
-        if (x - width/2 + shift <= xLow && shift < 0) {
-            x = xLow + width/2;
-        }
-        else if (x + width/2 + shift >= xHigh && shift > 0) {
-            x = xHigh - width/2;
-        }
-        else {
-            x += shift;
-        }
-    }*/
 }
 
