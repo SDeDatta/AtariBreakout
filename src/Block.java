@@ -20,20 +20,24 @@ public class Block {
         this.northPole = northPole;
 
     }
+    // Draws one block at a specific x, y, width, and height
     public void draw(Graphics g)
     {
         g.drawImage(iceImage, x, y, width, height, northPole);
     }
-
+    // Returns the bounds of the block (space that the block takes up)
     public Rectangle getBounds()
     {return new Rectangle(x, y, width, height);}
-
-    public void checkHit()
+    public int getWidth()
+    {
+        return this.width;
+    }
+/*    public void checkHit()
     {}
 
     public boolean getIsHit()
     {return false;}
 
     public boolean destroy()
-    {return false;}
+    {return false;}*/
 }

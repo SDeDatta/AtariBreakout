@@ -8,26 +8,30 @@ public class GameView extends JFrame{
     private Image initialBgImage;
     private Image endBgImage;
     private Image wonBgImage;
+    private Image sadPenguin;
+    private Image happyPenguin;
+    // Initializes the screen size
     public static final int WINDOW_WIDTH = 1000;
     public static final int WINDOW_HEIGHT = 800;
     private Game game;
     public GameView(Game g)
     {
-        // Initialize instance variables.
-        // TODO: initialize the View's instance variables.
+        // Initializes instance variables
         this.game = g;
         bgImage = new ImageIcon("Resources/Pengu.jpeg").getImage();
         initialBgImage = new ImageIcon("Resources/BlackBackground.jpg").getImage();
         endBgImage = new ImageIcon("Resources/GameOverBg.jpg").getImage();
         wonBgImage = new ImageIcon("Resources/WinScreen.jpg").getImage();
-        game.getBall();
-        game.getBar();
-        // Setup the window and the buffer strategy.
+        sadPenguin = new ImageIcon("Resources/sad-penguin-600nw-106730045__1_-removebg-preview.png").getImage();
+        happyPenguin =  new ImageIcon("Resources/happy-dancing-cartoon-penguin-illustration-vector-removebg-preview.png").getImage();
+        // Sets up the window and the buffer strategy
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
         this.setTitle("Atari Breakout");
         this.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+        // Calls paint
         this.setVisible(true);
+        // Allows for animation
         createBufferStrategy(2);
     }
     public void paint(Graphics g) {
@@ -51,6 +55,7 @@ public class GameView extends JFrame{
      *
      * This is used by the buffering strategy to do the actual painting.
      */
+    // Determines which part of the game needs to be drawn
     public void myPaint(Graphics g)
     {
         if(game.getState().equals("instructions"))
@@ -70,6 +75,7 @@ public class GameView extends JFrame{
             drawWon(g);
         }
     }
+    // Draws the start screen
     public void drawStart(Graphics g)
     {
         g.drawImage(initialBgImage, 0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, this);
@@ -86,6 +92,7 @@ public class GameView extends JFrame{
         g.drawString("as you hit more blocks. Enjoy!", centerX + 150, startY + 4 * lineSpacing);
 
     }
+    // Draws the game (including the background, bar, ball, and blocks)
     public void drawGame(Graphics g)
     {
         g.drawImage(bgImage,0,0,WINDOW_WIDTH, WINDOW_HEIGHT, this);
@@ -96,19 +103,23 @@ public class GameView extends JFrame{
             b.draw(g);
         }
     }
+    // Draws the lost game screen
     public void drawEnd(Graphics g)
     {
         g.drawImage(endBgImage, 0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, this);
+        g.drawImage(sadPenguin, 200, 200, 100, 100, this);
         g.setColor(Color.ORANGE);
         g.setFont(new Font("SansSerif", Font.BOLD, 15));
-        g.drawString("You hit " + (30 - game.getBlocks().size()) + "/30 Press space to play again", 400, 600);
+        g.drawString("You hit " + (30 - game.getBlocks().size()) + " blocks out of 30 in " + game.getHits() + " hits. Press space to play again", 270, 600);
     }
+    // Draws the won game screen
     public void drawWon(Graphics g)
     {
         g.drawImage(wonBgImage, 0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, this);
+        g.drawImage(happyPenguin, 200, 200, 100, 100, this);
         g.setColor(Color.ORANGE);
         g.setFont(new Font("SansSerif", Font.BOLD, 15));
-        g.drawString("Congrats You're Brilliant", 400, 600);
+        g.drawString("Congrats You're Brilliant. It took you " + game.getHits() + " hits", 350, 600);
         g.drawString("Press space to play again", 400, 630);
     }
 }

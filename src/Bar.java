@@ -1,27 +1,26 @@
 import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 
 public class Bar {
     private int x;
     private int width;
-    private int height;
+    private final int height = 10;
     private int dx;
-    private int dy;
     private int y;
 
-    public Bar(int dx, int dy)
+    public Bar(int dx)
     {
+        //Sets the bar to the middle of the screen and close to the bottom
         x = 500;
         y = 750;
-        this.width = 50;
-        this.height = 10;
+        // Initializes the width and height of the bar
+        this.width = 0;
+        // Variable that represents the change in x
         this.dx = dx;
-        this.dy = dy;
     }
     public void moveLeft()
     {
-        // Change the speed
+        // Changes the position of the bar based on dx
+        // Ensures the bar doesn't go off the left side of the screen
         if(x + dx > 0)
         {
             dx -= 10;
@@ -30,6 +29,7 @@ public class Bar {
     }
     public void moveRight()
     {
+        // Ensures the bar doesn't go off the right side of the screen
         if(x + dx + width < GameView.WINDOW_WIDTH)
         {
             dx += 10;
@@ -40,15 +40,15 @@ public class Bar {
     {
         dx = velocity;
     }
+    // Draws the bar at the specific x, y, width, and height
     public void draw(Graphics g)
     {
         g.setColor(Color.DARK_GRAY);
-        g.fillRect(this.x, y, width, height);
+        g.fillRect(this.x, this.y, width, height);
     }
+    // Returns the bounds of the bar (space that the bar takes up)
     public Rectangle getBounds()
     {return new Rectangle(x, y, width, height);}
-    public int getX()
-    {return 0;}
     public int getWidth()
     {
         return width;
@@ -57,9 +57,9 @@ public class Bar {
     {
         this.width = width;
     }
+    public int getX()
+    {return this.x;}
     public int getY()
-    {return 0;}
-    public int getSize()
-    {return 0;}
+    {return this.y;}
 }
 

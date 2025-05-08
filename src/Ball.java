@@ -7,34 +7,37 @@ public class Ball {
     private int x;
     private int y;
     private int diameter;
+    // Variables for the changes in x and y of the ball
     private double dx, dy;
-    private static final int MAX_SPEED = 20;
 
     public Ball(int x, int y, int diameter)
     {
         sunImage =  new ImageIcon("Resources/SunImage-Photoroom.png").getImage();
+        // Starts the ball at a random yet reasonable position
         this.x = (int) (Math.random() * 20) + 490;
-        this.y = (int) (Math.random() * 250) + 500;
+        this.y = (int) (Math.random() * 200) + 500;
         this.diameter = diameter;
         this.dx = 0;
         this.dy = 0;
     }
+    // Sets the direction of the ball
     public void setSpeed(double xSpeed, double ySpeed)
     {
         this.dx = xSpeed;
         this.dy = ySpeed;
     }
-
     public void setDiameter(int diameter)
     {
         this.diameter = diameter;
     }
+    // Moves the ball's x and y and calls bounce
     public void move()
     {
         x += dx;
         y += dy;
         bounce();
     }
+    // Checks if the ball hit the bottom of the screen to determine if the game is over
     public boolean checkHitBottom()
     {
         if(this.y >= GameView.WINDOW_HEIGHT - diameter)
@@ -43,28 +46,25 @@ public class Ball {
         }
         return false;
     }
+    // Draws the ball at the specific x, y, and diameter
     public void draw(Graphics g)
     {
         g.drawImage(sunImage, x, y, diameter, diameter, northPole);
     }
+    // Bounces the ball when contact is made with the top or sides of the screen
     public void bounce()
     {
+        // Reverses the direction of the ball
         if ((x <= 0 && dx < 0) || (x >= GameView.WINDOW_WIDTH - diameter && dx > 0)) {
             dx = -dx;
         }
         if(y < diameter)
         {
-            y = diameter;
+            y = diameter + 1;
             dy = -dy;
         }
     }
-
-    public void reset()
-    {
-        this.dx = 5;
-        this.dy = 9;
-    }
-
+    // Increases the speed of the ball based on a given variable
     public void increaseSpeed(double boost)
     {
         double speedBoost = boost;
@@ -79,6 +79,7 @@ public class Ball {
             dy += speedBoost;
         }
     }
+    // Returns the bounds of the ball (space that the ball takes up)
     public Rectangle getBounds()
     {return new Rectangle(x, y, diameter, diameter);}
     public int getX()
@@ -95,15 +96,6 @@ public class Ball {
     {
         return diameter;
     }
-    public void setDx(double dx)
-    {
-        this.dx = dx;
-    }
-
-    public void setDy(double dy) {
-        this.dy = dy;
-    }
-
     public int getY()
     {return this.y;}
 
