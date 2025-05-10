@@ -2,10 +2,10 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Block {
-    private int x, y;
-    private int width;
-    private int height;
-    private boolean isHit;
+    private final int x;
+    private final int y;
+    private final int width;
+    private final int height;
     private Image iceImage;
     private GameView northPole;
 
@@ -15,7 +15,6 @@ public class Block {
         this.y = y;
         this.width = width;
         this.height = height;
-        this.isHit = false;
         iceImage = new ImageIcon("Resources/StockIcePhoto-Photoroom.png").getImage();
         this.northPole = northPole;
 
@@ -32,12 +31,4 @@ public class Block {
     {
         return this.width;
     }
-/*    public void checkHit()
-    {}
-
-    public boolean getIsHit()
-    {return false;}
-
-    public boolean destroy()
-    {return false;}*/
 }

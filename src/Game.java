@@ -1,6 +1,5 @@
 // Penguin Breakout by Surya De Datta
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -48,10 +47,7 @@ public class Game implements KeyListener,ActionListener {
     }
     // Checks if all blocks have been destroyed and the game is therefore won
     public boolean gameWon() {
-        if (this.blocks.isEmpty()) {
-            return true;
-        }
-        return false;
+        return this.blocks.isEmpty();
     }
     // Checks if the ball has collided with the bar or any of the blocks
     public void checkCollisions()
@@ -64,7 +60,7 @@ public class Game implements KeyListener,ActionListener {
             int barMid = bar.getBounds().x + bar.getWidth() / 2;
             int ballMid = ball.getX() + ball.getDiameter() / 2;
             int distFromCenter = ballMid - barMid;
-            double ratio = (double) distFromCenter / (bar.getWidth() / 2);
+            double ratio = (double) distFromCenter / ((double) bar.getWidth() / 2);
             int maxHorSpeed = 8;
             ball.setSpeed((ratio * maxHorSpeed), ball.getDy()* -1);
         }
@@ -86,18 +82,10 @@ public class Game implements KeyListener,ActionListener {
                 blocks.remove(i);
                 // Increases the speed of the ball after a block is hit
                 // Different increase of speed based on what level the player is playing
-                if(this.level.equals("easy"))
-                {
-                    ball.increaseSpeed(0.2);
-
-                }
-                else if(this.level.equals("medium"))
-                {
-                    ball.increaseSpeed(0.4);
-                }
-                else if(this.level.equals("hard"))
-                {
-                    ball.increaseSpeed(0.8);
+                switch (this.level) {
+                    case "easy" -> ball.increaseSpeed(0.2);
+                    case "medium" -> ball.increaseSpeed(0.4);
+                    case "hard" -> ball.increaseSpeed(0.8);
                 }
                 break;
             }
@@ -216,20 +204,19 @@ public class Game implements KeyListener,ActionListener {
         this.state = "instructions";
         this.blocks = new ArrayList<>();
         this.bar = new Bar(0);
-        this.ball = new Ball(100, 100, 35);
+        this.ball = new Ball(35, window);
         // Creates all the blocks and gets them to draw themselves
         int rows = 3;
         int cols = 10;
         int padding = 10;
         int blockWidth = (GameView.WINDOW_WIDTH - (cols + 1) * padding) / cols;
         int blockHeight = 30;
-        int startX = padding;
         int startY = 100;
         for(int row = 0; row < rows; row++)
         {
             for(int col = 0; col < cols; col++)
             {
-                int x = startX + col * (blockWidth + padding);
+                int x = padding + col * (blockWidth + padding);
                 int y = startY + row * (blockHeight + padding);
                 blocks.add(new Block(x, y, blockWidth, blockHeight, window));
             }

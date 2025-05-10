@@ -1,6 +1,5 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionListener;
 import java.awt.image.BufferStrategy;
 
 public class GameView extends JFrame{
@@ -58,21 +57,11 @@ public class GameView extends JFrame{
     // Determines which part of the game needs to be drawn
     public void myPaint(Graphics g)
     {
-        if(game.getState().equals("instructions"))
-        {
-            drawStart(g);
-        }
-        else if(game.getState().equals("game"))
-        {
-            drawGame(g);
-        }
-        else if (game.getState().equals("lost"))
-        {
-            drawEnd(g);
-        }
-        else if(game.getState().equals("won"))
-        {
-            drawWon(g);
+        switch (game.getState()) {
+            case "instructions" -> drawStart(g);
+            case "game" -> drawGame(g);
+            case "lost" -> drawEnd(g);
+            case "won" -> drawWon(g);
         }
     }
     // Draws the start screen

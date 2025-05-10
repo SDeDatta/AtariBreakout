@@ -5,13 +5,12 @@ public class Bar {
     private int width;
     private final int height = 10;
     private int dx;
-    private int y;
+    private final int y = 750;
 
     public Bar(int dx)
     {
         //Sets the bar to the middle of the screen and close to the bottom
         x = 500;
-        y = 750;
         // Initializes the width and height of the bar
         this.width = 0;
         // Variable that represents the change in x

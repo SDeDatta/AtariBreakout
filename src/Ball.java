@@ -10,8 +10,9 @@ public class Ball {
     // Variables for the changes in x and y of the ball
     private double dx, dy;
 
-    public Ball(int x, int y, int diameter)
+    public Ball(int diameter, GameView gv)
     {
+        this.northPole = gv;
         sunImage =  new ImageIcon("Resources/SunImage-Photoroom.png").getImage();
         // Starts the ball at a random yet reasonable position
         this.x = (int) (Math.random() * 20) + 490;
@@ -40,11 +41,7 @@ public class Ball {
     // Checks if the ball hit the bottom of the screen to determine if the game is over
     public boolean checkHitBottom()
     {
-        if(this.y >= GameView.WINDOW_HEIGHT - diameter)
-        {
-            return true;
-        }
-        return false;
+        return this.y >= GameView.WINDOW_HEIGHT - diameter;
     }
     // Draws the ball at the specific x, y, and diameter
     public void draw(Graphics g)
@@ -67,16 +64,15 @@ public class Ball {
     // Increases the speed of the ball based on a given variable
     public void increaseSpeed(double boost)
     {
-        double speedBoost = boost;
         double maxSpeed = 20;
 
         if(Math.abs(dx) < maxSpeed)
         {
-            dx += speedBoost;
+            dx += boost;
         }
         if(Math.abs(dy) < maxSpeed)
         {
-            dy += speedBoost;
+            dy += boost;
         }
     }
     // Returns the bounds of the ball (space that the ball takes up)
